@@ -29,7 +29,7 @@ class Game
 
     def winner
       if winning_combo = won?
-        @winner = @board.cells[winning_combo.first]
+        @board.cells[winning_combo.first]
       end
     end
 
@@ -51,16 +51,22 @@ class Game
 # what's the move
         current_move = player.move(board)
 # is the move valid
-        board.valid_move?(current_move)
+        if board.valid_move?(current_move)
 # execute Order 66
-        board.update(current_move, player)
-# is the game over
-        if over?
-# if won, winner
-          winner if won?
+          board.update(current_move, player)
         else
-# else turn
           turn
+        end
+      end
+
+      def play
+        while !over?
+          turn
+        end
+        if won?
+          puts "Congratulations #{winner}!"
+        elsif draw?
+          puts "Cat's Game!"
         end
       end
     end
