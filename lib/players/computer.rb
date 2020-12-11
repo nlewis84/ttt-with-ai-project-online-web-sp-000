@@ -4,7 +4,7 @@ module Players
         binding.pry
         board.cells.each_with_index do |cell, index|
           if cell == " "
-            return index
+            return index + 1
           end
         end
     end
